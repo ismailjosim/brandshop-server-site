@@ -23,8 +23,6 @@ app.get('/cheflist', (req, res) => {
             data: chefData.length,
             cheflist: chefData
         })
-
-
     } catch (error) {
         res.send({
             success: false,
@@ -50,9 +48,6 @@ app.get('/cheflist/:id', (req, res) => {
         })
     }
 })
-
-
-
 
 app.listen(port, () => {
     console.log(`chef Server Running on Port: ${ port }`.bgCyan.bold);
