@@ -31,6 +31,12 @@ app.get('/cheflist', (req, res) => {
     }
 })
 
+app.get('/chefData', (req, res) => {
+    res.send(data)
+})
+
+
+
 // get Single Chef list
 app.get('/cheflist/:id', (req, res) => {
     try {
