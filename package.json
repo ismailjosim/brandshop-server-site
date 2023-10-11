@@ -3,5 +3,16 @@
     "colors": "^1.4.0",
     "cors": "^2.8.5",
     "express": "^4.18.2"
-  }
+  },
+  "name": "assignment-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

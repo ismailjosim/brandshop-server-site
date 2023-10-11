@@ -9,6 +9,7 @@ const port = process.env.PORT || 5000;
 const chefData = require('./data/chefList.json');
 
 app.use(cors());
+app.use(express.json())
 
 // default route
 app.get('/', (req, res) => {
@@ -58,3 +59,4 @@ app.get('/cheflist/:id', (req, res) => {
 app.listen(port, () => {
     console.log(`chef Server Running on Port: ${ port }`.bgCyan.bold);
 },)
+
