@@ -1,62 +1,49 @@
+require('colors');
+require('dotenv').config()
 const express = require('express');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+
+
 const app = express();
 const cors = require('cors');
-require('colors');
+
 const port = process.env.PORT || 5000;
 
 
-// get local data
-const chefData = require('./data/chefList.json');
 
 app.use(cors());
 app.use(express.json())
 
-// default route
-app.get('/', (req, res) => {
-    res.send("<h2 style='text-align: center; margin-top: 1rem;'>chef Server Running 🚩</h2>");
+
+const uri = `mongodb+srv://${ process.env.DB_USER }:${ process.env.DB_PASS }@cluster0.s9x13go.mongodb.net/?retryWrites=true&w=majority`;
+
+const client = new MongoClient(uri, {
+    serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
+    }
 });
 
-// get all chef List
-app.get('/cheflist', (req, res) => {
+const dbConnect = async () => {
     try {
-        res.send({
-            success: true,
-            data: chefData.length,
-            cheflist: chefData
-        })
+        client.connect();
+        console.log("Database Connected Successfully✅".bgRed.bold);
+
     } catch (error) {
-        res.send({
-            success: false,
-            error: error.message
-        })
+        console.log(error.name, error.message);
     }
-})
+}
+dbConnect();
 
-app.get('/chefData', (req, res) => {
-    res.send(data)
-})
+// default route
+app.get('/', (req, res) => {
+    res.send("<h2 style='text-align: center; margin-top: 1rem;'>Server Running 🚩</h2>");
+});
 
 
-
-// get Single Chef list
-app.get('/cheflist/:id', (req, res) => {
-    try {
-        const id = req.params.id;
-        const result = chefData.find(d => d.id === id);
-
-        res.send({
-            success: true,
-            singleChef: result
-        })
-    } catch (error) {
-        res.send({
-            success: false,
-            error: error.message
-        })
-    }
-})
 
 app.listen(port, () => {
-    console.log(`chef Server Running on Port: ${ port }`.bgCyan.bold);
+    console.log(`Server Running on Port: ${ port }`.bgCyan.bold);
 },)
 
