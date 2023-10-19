@@ -126,6 +126,38 @@ app.post("/booking", async (req, res) => {
     }
 })
 
+// get all carts
+
+app.get("/cart", async (req, res) => {
+    try {
+        const email = req.query.email;
+        console.log(email)
+
+        let query;
+        if (email) {
+            query = { email: email };
+        } else {
+            query = {}
+        }
+
+
+        const carts = await cartCollection.find(query).toArray();
+
+        res.send({
+            status: true,
+            data: carts
+        })
+
+    } catch (error) {
+        res.send({
+            status: true,
+            error: error.message
+        })
+    }
+})
+
+
+
 
 app.listen(port, () => {
     console.log(`DB Server Running on Port:${ port }📥`.cyan.bold);
