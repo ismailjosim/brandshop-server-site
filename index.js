@@ -39,12 +39,32 @@ dbConnect();
 
 // all database collection
 const db = client.db("movieDB");
+const brandsCollection = db.collection("brands");
 const moviesCollection = db.collection('movies');
 
 // default route
 app.get('/', (req, res) => {
     res.send("<h2 style='text-align: center; margin-top: 1rem;'>MovieDB Server Running 🚩</h2>");
 });
+
+
+/* Brands Route */
+app.get("/brands", async (_, res) => {
+    try {
+
+        const brands = await brandsCollection.find({}).toArray();
+        res.send({
+            status: true,
+            data: brands
+        })
+
+    } catch (error) {
+        res.send({
+            status: true,
+            error: error.message
+        })
+    }
+})
 
 /* Movies Routes goes here*/
 
@@ -65,6 +85,8 @@ app.get("/movies", async (_, res) => {
         })
     }
 })
+
+
 
 
 
