@@ -1,0 +1,32 @@
+[
+	{
+		"brandName": "Disney",
+		"brandLogo": "https://example.com/disney_logo.png",
+		"brandId": "1"
+	},
+	{
+		"brandName": "Netflix",
+		"brandLogo": "https://example.com/netflix_logo.png",
+		"brandId": "2"
+	},
+	{
+		"brandName": "Warner Bros",
+		"brandLogo": "https://example.com/warnerbros_logo.png",
+		"brandId": "3"
+	},
+	{
+		"brandName": "Sony Pictures",
+		"brandLogo": "https://example.com/sonypictures_logo.png",
+		"brandId": "4"
+	},
+	{
+		"brandName": "Spotify",
+		"brandLogo": "https://example.com/spotify_logo.png",
+		"brandId": "5"
+	},
+	{
+		"brandName": "Fox Studio",
+		"brandLogo": "https://example.com/timewarner_logo.png",
+		"brandId": "6"
+	}
+]

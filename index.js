@@ -28,7 +28,7 @@ const client = new MongoClient(uri, {
 const dbConnect = async () => {
     try {
         client.connect();
-        console.log("Database Connected Successfully✅".bgRed.bold);
+        console.log("MovieDB Connected Successfully✅".red.bold);
 
     } catch (error) {
         console.log(error.name, error.message);
@@ -36,14 +36,40 @@ const dbConnect = async () => {
 }
 dbConnect();
 
+
+// all database collection
+const db = client.db("movieDB");
+const moviesCollection = db.collection('movies');
+
 // default route
 app.get('/', (req, res) => {
-    res.send("<h2 style='text-align: center; margin-top: 1rem;'>Server Running 🚩</h2>");
+    res.send("<h2 style='text-align: center; margin-top: 1rem;'>MovieDB Server Running 🚩</h2>");
 });
+
+/* Movies Routes goes here*/
+
+// Get All Movies
+app.get("/movies", async (_, res) => {
+    try {
+
+        const movies = await moviesCollection.find({}).toArray();
+        res.send({
+            status: true,
+            data: movies
+        })
+
+    } catch (error) {
+        res.send({
+            status: true,
+            error: error.message
+        })
+    }
+})
+
 
 
 
 app.listen(port, () => {
-    console.log(`Server Running on Port: ${ port }`.bgCyan.bold);
+    console.log(`DB Server Running on Port:${ port }📥`.cyan.bold);
 },)
 
