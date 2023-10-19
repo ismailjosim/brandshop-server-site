@@ -1,7 +1,7 @@
 require('colors');
 require('dotenv').config()
 const express = require('express');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 
 const app = express();
@@ -41,6 +41,7 @@ dbConnect();
 const db = client.db("movieDB");
 const brandsCollection = db.collection("brands");
 const moviesCollection = db.collection('movies');
+const cartCollection = db.collection("cart");
 
 // default route
 app.get('/', (req, res) => {
@@ -51,7 +52,6 @@ app.get('/', (req, res) => {
 /* Brands Route */
 app.get("/brands", async (_, res) => {
     try {
-
         const brands = await brandsCollection.find({}).toArray();
         res.send({
             status: true,
@@ -69,10 +69,13 @@ app.get("/brands", async (_, res) => {
 /* Movies Routes goes here*/
 
 // Get All Movies
-app.get("/movies", async (_, res) => {
+app.get("/movies/:brand", async (req, res) => {
     try {
+        const brandName = req.params.brand;
+        const query = { brand: brandName }
+        const movies = await moviesCollection.find(query).toArray();
 
-        const movies = await moviesCollection.find({}).toArray();
+
         res.send({
             status: true,
             data: movies
@@ -86,9 +89,42 @@ app.get("/movies", async (_, res) => {
     }
 })
 
+app.get("/singleMovie/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const query = { _id: new ObjectId(id) };
+        const singleMovie = await moviesCollection.findOne(query)
 
+        res.send({
+            status: true,
+            data: singleMovie
+        })
 
+    } catch (error) {
+        res.send({
+            status: true,
+            error: error.message
+        })
+    }
+})
 
+app.post("/booking", async (req, res) => {
+    try {
+        const movie = req.body;
+        const result = await cartCollection.insertOne(movie);
+
+        res.send({
+            status: true,
+            data: result
+        })
+
+    } catch (error) {
+        res.send({
+            status: true,
+            error: error.message
+        })
+    }
+})
 
 
 app.listen(port, () => {
