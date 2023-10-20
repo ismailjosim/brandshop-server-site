@@ -66,8 +66,40 @@ app.get("/brands", async (_, res) => {
 })
 
 /* Movies Routes goes here*/
+app.get("/movies", async (_, res) => {
+    try {
+        const movies = await moviesCollection.find({}).toArray();
+        res.send({
+            status: true,
+            data: movies
+        })
 
-// Get All Movies
+    } catch (error) {
+        res.send({
+            status: true,
+            error: error.message
+        })
+    }
+})
+app.delete("/delete_movies/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        console.log(id);
+        const query = { _id: new ObjectId(id) };
+        const movie = await moviesCollection.deleteOne(query)
+        res.send({
+            status: true,
+            data: movie
+        })
+
+    } catch (error) {
+        res.send({
+            status: true,
+            error: error.message
+        })
+    }
+})
+
 app.get("/movies/:brand", async (req, res) => {
     try {
         const brandName = req.params.brand;
@@ -141,8 +173,7 @@ app.post("/booking", async (req, res) => {
     }
 })
 
-// get all carts
-
+// cart routes
 app.get("/cart", async (req, res) => {
     try {
         const email = req.query.email;
@@ -162,8 +193,25 @@ app.get("/cart", async (req, res) => {
     }
 })
 
+// Delete single Cart Item
+app.delete("/delete_cart/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        console.log(id);
+        const query = { _id: new ObjectId(id) };
+        const cart = await cartCollection.deleteOne(query)
+        res.send({
+            status: true,
+            data: cart
+        })
 
-
+    } catch (error) {
+        res.send({
+            status: true,
+            error: error.message
+        })
+    }
+})
 
 app.listen(port, () => {
     console.log(`DB Server Running on Port:${ port }📥`.cyan.bold);
