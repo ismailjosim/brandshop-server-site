@@ -3,7 +3,6 @@ require('dotenv').config()
 const express = require('express');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
-
 const app = express();
 const cors = require('cors');
 
@@ -108,6 +107,22 @@ app.get("/singleMovie/:id", async (req, res) => {
     }
 })
 
+app.post("/add_movie", async (req, res) => {
+    try {
+        const movie = req.body;
+        const result = await moviesCollection.insertOne(movie);
+        res.send({
+            status: true,
+            data: result
+        })
+    } catch (error) {
+        res.send({
+            status: true,
+            error: error.message
+        })
+    }
+})
+
 app.post("/booking", async (req, res) => {
     try {
         const movie = req.body;
@@ -131,16 +146,7 @@ app.post("/booking", async (req, res) => {
 app.get("/cart", async (req, res) => {
     try {
         const email = req.query.email;
-        console.log(email)
-
-        let query;
-        if (email) {
-            query = { email: email };
-        } else {
-            query = {}
-        }
-
-
+        let query = { email: email };
         const carts = await cartCollection.find(query).toArray();
 
         res.send({
