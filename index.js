@@ -154,6 +154,36 @@ app.post("/add_movie", async (req, res) => {
     }
 })
 
+app.put("/update_movie/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const movie = req.body;
+        const filter = { _id: new ObjectId(id) };
+        const options = { upsert: true };
+        const updateMovie = {
+            $set: {
+                name: movie.name,
+                image: movie.image,
+                brand: movie.brand,
+                type: movie.type,
+                details: movie.details,
+                ticketPrice: movie.ticketPrice,
+                rating: movie.rating
+            }
+        }
+        const result = await moviesCollection.updateOne(filter, updateMovie, options);
+        res.send({
+            status: true,
+            data: result
+        })
+    } catch (error) {
+        res.send({
+            status: true,
+            error: error.message
+        })
+    }
+})
+
 app.post("/booking", async (req, res) => {
     try {
         const movie = req.body;
