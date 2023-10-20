@@ -84,7 +84,6 @@ app.get("/movies", async (_, res) => {
 app.delete("/delete_movies/:id", async (req, res) => {
     try {
         const id = req.params.id;
-        console.log(id);
         const query = { _id: new ObjectId(id) };
         const movie = await moviesCollection.deleteOne(query)
         res.send({
@@ -197,7 +196,6 @@ app.get("/cart", async (req, res) => {
 app.delete("/delete_cart/:id", async (req, res) => {
     try {
         const id = req.params.id;
-        console.log(id);
         const query = { _id: new ObjectId(id) };
         const cart = await cartCollection.deleteOne(query)
         res.send({
