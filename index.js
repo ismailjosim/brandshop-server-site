@@ -2,13 +2,15 @@ require('colors')
 require('dotenv').config()
 const express = require('express')
 const jwt = require('jsonwebtoken')
-const cookieParser = require('cookie-parser')
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
+const cookieParser = require('cookie-parser');
 
+
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
 const app = express()
 const cors = require('cors')
 
 const port = process.env.PORT || 5000
+const jwtSecret = process.env.ACCESS_TOKEN_SECRET
 
 app.use(
     cors({
@@ -16,8 +18,33 @@ app.use(
         credentials: true, // it won't sent cookie to others origin if we don't set it.
     }),
 )
+// app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 app.use(express.json())
-app.use(cookieParser())
+app.use(cookieParser());
+
+
+// middleware
+
+
+const verifyToken = async (req, res, next) => {
+    const token = req.cookies?.token;
+
+    if (!token) {
+        return res.status(401).send('Unauthorized access')
+    }
+    jwt.verify(token, jwtSecret, (error, decoded) => {
+        if (error) {
+            return res.status(403).send({
+                message: "forbidden access"
+            })
+        }
+        // req.decoded = decoded
+        console.log("decoded token", decoded)
+        req.decoded = decoded;
+        next();
+
+    })
+}
 
 const uri = `mongodb+srv://${ process.env.DB_USER }:${ process.env.DB_PASS }@cluster0.s9x13go.mongodb.net/?retryWrites=true&w=majority`
 
@@ -30,8 +57,6 @@ const client = new MongoClient(uri, {
 })
 
 const dbConnect = async () => {
-
-
     try {
         client.connect()
         console.log('DB Connected Successfully✅')
@@ -60,7 +85,7 @@ app.post('/jwt', async (req, res) => {
     try {
         const user = req.body
         // console.log(user)
-        const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+        const token = jwt.sign(user, jwtSecret, {
             expiresIn: '1d',
         })
         res
@@ -82,8 +107,9 @@ app.post('/jwt', async (req, res) => {
 })
 
 /* Brands Route */
-app.get('/brands', async (_, res) => {
+app.get('/brands', async (req, res) => {
     try {
+
         const brands = await brandsCollection.find({}).toArray()
         res.send({
             status: true,
@@ -100,6 +126,7 @@ app.get('/brands', async (_, res) => {
 /* Movies Routes goes here*/
 app.get('/movies', async (_, res) => {
     try {
+
         const movies = await moviesCollection.find({}).toArray()
         res.send({
             status: true,
@@ -112,6 +139,7 @@ app.get('/movies', async (_, res) => {
         })
     }
 })
+
 app.delete('/delete_movies/:id', async (req, res) => {
     try {
         const id = req.params.id
@@ -233,10 +261,21 @@ app.post('/booking', async (req, res) => {
 })
 
 // cart routes
-app.get('/cart', async (req, res) => {
+app.get('/cart', verifyToken, async (req, res) => {
     try {
+        console.log("inside booking cart", req.decoded)
         const email = req.query.email
-        let query = { email: email }
+
+        if (!email) {
+            res.send([])
+        }
+
+        // check valid user
+        const decodedEmail = req.decoded.email;
+        if (email !== decodedEmail) {
+            res.status(403).send({ message: "Forbidden Access" })
+        }
+        const query = { email: email }
         const carts = await cartCollection.find(query).toArray()
 
         res.send({
