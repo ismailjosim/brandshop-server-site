@@ -14,7 +14,7 @@ const jwtSecret = process.env.ACCESS_TOKEN_SECRET
 
 app.use(
     cors({
-        origin: ['http://localhost:5173'],
+        origin: ['http://localhost:5173', 'https://enmmedia-19300.web.app'],
         credentials: true, // it won't sent cookie to others origin if we don't set it.
     }),
 )
