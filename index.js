@@ -1,31 +1,30 @@
 require('colors')
-require('dotenv').config()
 const express = require('express')
+require('dotenv').config()
+const cors = require('cors')
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser');
 
 
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
 const app = express()
-const cors = require('cors')
+
 
 const port = process.env.PORT || 5000
 const jwtSecret = process.env.ACCESS_TOKEN_SECRET
 
 app.use(
     cors({
-        origin: ['http://localhost:5173', 'https://enmmedia-19300.web.app'],
-        credentials: true, // it won't sent cookie to others origin if we don't set it.
+        origin: ['http://localhost:5173'],
+        credentials: true,
     }),
 )
 // app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
-app.use(express.json())
+app.use(express.json());
 app.use(cookieParser());
 
 
 // middleware
-
-
 const verifyToken = async (req, res, next) => {
     const token = req.cookies?.token;
 
@@ -39,12 +38,15 @@ const verifyToken = async (req, res, next) => {
             })
         }
         // req.decoded = decoded
-        console.log("decoded token", decoded)
+        // console.log("decoded token", decoded)
         req.decoded = decoded;
         next();
-
     })
 }
+
+
+
+
 
 const uri = `mongodb+srv://${ process.env.DB_USER }:${ process.env.DB_PASS }@cluster0.s9x13go.mongodb.net/?retryWrites=true&w=majority`
 
@@ -105,6 +107,18 @@ app.post('/jwt', async (req, res) => {
         })
     }
 })
+
+app.post('/logout', async (req, res) => {
+    const user = req.body;
+    // console.log('logging out', user);
+    res.clearCookie('token', { maxAge: 0 }).send({ success: true })
+})
+
+// res.cookie('token', token, {
+//     httpOnly: true,
+//     secure: process.env.NODE_ENV === 'production',
+//     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+// })
 
 /* Brands Route */
 app.get('/brands', async (req, res) => {
@@ -263,7 +277,7 @@ app.post('/booking', async (req, res) => {
 // cart routes
 app.get('/cart', verifyToken, async (req, res) => {
     try {
-        console.log("inside booking cart", req.decoded)
+        // console.log("inside booking cart", req.decoded)
         const email = req.query.email
 
         if (!email) {
@@ -371,3 +385,4 @@ app.post('/users', async (req, res) => {
 app.listen(port, () => {
     console.log(`DB Server Running on Port:${ port }📥`.cyan.bold)
 })
+
