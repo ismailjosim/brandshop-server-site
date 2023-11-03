@@ -34,8 +34,6 @@ const verifyToken = async (req, res, next) => {
                 message: 'forbidden access',
             })
         }
-        // req.decoded = decoded
-        // console.log("decoded token", decoded)
         req.decoded = decoded
         next()
     })
@@ -103,17 +101,17 @@ app.post('/jwt', async (req, res) => {
 
 app.post('/logout', async (req, res) => {
     const user = req.body
-    // console.log('logging out', user);
-    res.clearCookie('token', { maxAge: 0 }).send({ success: true })
+    res.clearCookie(
+        "token",
+        {
+            maxAge: 0,
+            secure: process.env.NODE_ENV === "production" ? true : false,
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+        }
+    )
+        .send({ status: true })
 })
-/*
-res.cookie('token', token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
-})
- .send({status: true})
-*/
+
 /* Brands Route */
 app.get('/brands', async (req, res) => {
     try {
@@ -290,7 +288,6 @@ app.get('/cart', verifyToken, async (req, res) => {
             res.status(403).send({ message: 'Forbidden Access' })
         }
         const query = { email: email }
-
         const carts = await cartCollection.find(query).toArray()
 
         res.send({
@@ -304,6 +301,8 @@ app.get('/cart', verifyToken, async (req, res) => {
         })
     }
 })
+
+
 
 // Delete single Cart Item
 app.delete('/delete_cart/:id', async (req, res) => {
@@ -339,6 +338,8 @@ app.get('/users', async (req, res) => {
         })
     }
 })
+
+
 app.get('/user/:email', async (req, res) => {
     try {
         const email = req.params.email
@@ -355,6 +356,8 @@ app.get('/user/:email', async (req, res) => {
         })
     }
 })
+
+
 app.post('/users', async (req, res) => {
     try {
         const user = req.body
