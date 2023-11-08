@@ -17,7 +17,6 @@ app.use(
         credentials: true,
     }),
 )
-// app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 app.use(express.json())
 app.use(cookieParser())
 
@@ -67,7 +66,7 @@ const cartCollection = db.collection('cart')
 const userCollection = db.collection('user')
 
 // default route
-app.get('/', (req, res) => {
+app.get('/', (_, res) => {
     res.send(
         "<h2 style='text-align: center; margin-top: 1rem;'>MovieDB Server Running 🚩</h2>",
     )
@@ -84,9 +83,8 @@ app.post('/jwt', async (req, res) => {
         res
             .cookie('token', token, {
                 httpOnly: true,
-                secure: process.env.NODE_ENV === 'production', // Set to true in production
-                sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict', // Adjust based on your requirements
-                // maxAge: // how much time the cookie will exist
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
             })
             .send({
                 status: true,
@@ -101,14 +99,12 @@ app.post('/jwt', async (req, res) => {
 
 app.post('/logout', async (req, res) => {
     const user = req.body
-    res.clearCookie(
-        "token",
-        {
+    res
+        .clearCookie('token', {
             maxAge: 0,
-            secure: process.env.NODE_ENV === "production" ? true : false,
-            sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-        }
-    )
+            secure: process.env.NODE_ENV === 'production' ? true : false,
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+        })
         .send({ status: true })
 })
 
@@ -302,8 +298,6 @@ app.get('/cart', verifyToken, async (req, res) => {
     }
 })
 
-
-
 // Delete single Cart Item
 app.delete('/delete_cart/:id', async (req, res) => {
     try {
@@ -339,7 +333,6 @@ app.get('/users', async (req, res) => {
     }
 })
 
-
 app.get('/user/:email', async (req, res) => {
     try {
         const email = req.params.email
@@ -356,7 +349,6 @@ app.get('/user/:email', async (req, res) => {
         })
     }
 })
-
 
 app.post('/users', async (req, res) => {
     try {
