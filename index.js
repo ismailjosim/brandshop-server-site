@@ -17,12 +17,13 @@ app.use(
         credentials: true,
     }),
 )
+
 app.use(express.json())
 app.use(cookieParser())
 
 // middleware
 const verifyToken = async (req, res, next) => {
-    const token = req.cookies?.token
+    const token = req.cookies?.token;
 
     if (!token) {
         return res.status(401).send('Unauthorized access')
@@ -76,7 +77,6 @@ app.get('/', (_, res) => {
 app.post('/jwt', async (req, res) => {
     try {
         const user = req.body
-        // console.log(user)
         const token = jwt.sign(user, jwtSecret, {
             expiresIn: '1d',
         })
@@ -125,7 +125,7 @@ app.get('/brands', async (req, res) => {
 })
 
 /* Movies Routes goes here*/
-app.get('/movies', async (req, res) => {
+app.get('/movies', verifyToken, async (req, res) => {
     try {
         const query = {}
         const page = parseInt(req.query.page)
@@ -185,7 +185,7 @@ app.get('/movies/:brand', async (req, res) => {
     }
 })
 
-app.get('/singleMovie/:id', async (req, res) => {
+app.get('/singleMovie/:id', verifyToken, async (req, res) => {
     try {
         const id = req.params.id
         const query = { _id: new ObjectId(id) }
@@ -219,7 +219,7 @@ app.post('/add_movie', async (req, res) => {
     }
 })
 
-app.put('/update_movie/:id', async (req, res) => {
+app.put('/update_movie/:id', verifyToken, async (req, res) => {
     try {
         const id = req.params.id
         const movie = req.body
@@ -283,6 +283,7 @@ app.get('/cart', verifyToken, async (req, res) => {
         if (email !== decodedEmail) {
             res.status(403).send({ message: 'Forbidden Access' })
         }
+
         const query = { email: email }
         const carts = await cartCollection.find(query).toArray()
 
