@@ -21,6 +21,8 @@ app.use(
 app.use(express.json())
 app.use(cookieParser())
 
+
+
 // middleware
 const verifyToken = async (req, res, next) => {
     const token = req.cookies?.token;
@@ -109,7 +111,7 @@ app.post('/logout', async (req, res) => {
 })
 
 /* Brands Route */
-app.get('/brands', async (req, res) => {
+app.get('/brands', async (_, res) => {
     try {
         const brands = await brandsCollection.find({}).toArray()
         res.send({
@@ -273,20 +275,16 @@ app.post('/booking', async (req, res) => {
 // cart routes
 app.get('/cart', verifyToken, async (req, res) => {
     try {
-        // console.log("inside booking cart", req.decoded)
         const email = req.query.email
         if (!email) {
             res.send([])
         }
-        // check valid user
         const decodedEmail = req.decoded.email
         if (email !== decodedEmail) {
             res.status(403).send({ message: 'Forbidden Access' })
         }
-
         const query = { email: email }
         const carts = await cartCollection.find(query).toArray()
-
         res.send({
             status: true,
             data: carts,
@@ -318,8 +316,53 @@ app.delete('/delete_cart/:id', async (req, res) => {
     }
 })
 
+app.get("/order-stats", async (req, res) => {
+    const result = await paymentCollection
+        .aggregate([
+            {
+                $addFields: {
+                    menuItemsObjectIds: {
+                        $map: {
+                            input: "$menuId",
+                            as: "itemId",
+                            in: { $toObjectId: "$$itemId" },
+                        },
+                    },
+                },
+            },
+            {
+                $lookup: {
+                    from: "Bistrobd",
+                    localField: "menuItemsObjectIds",
+                    foreignField: "_id",
+                    as: "menuItemsData",
+                },
+            },
+            {
+                $unwind: '$menuItemsData'
+            },
+            {
+                $group: {
+                    _id: '$menuItemsData.category',
+                    count: { $sum: 1 },
+                    total: { $sum: '$menuItemsData.price' }
+                }
+            },
+            {
+                $project: {
+                    category: '$_id',
+                    count: 1,
+                    total: { $round: ['$total', 2] },
+                    _id: 0
+                }
+            }
+        ])
+        .toArray();
+    res.send(result);
+});
+
 // users routes
-app.get('/users', async (req, res) => {
+app.get('/users', async (_, res) => {
     try {
         const users = await userCollection.find({}).toArray()
         res.send({
@@ -382,3 +425,30 @@ app.post('/users', async (req, res) => {
 app.listen(port, () => {
     console.log(`DB Server Running on Port:${ port }📥`.cyan.bold)
 })
+
+
+/*
+    const email = req.query.email;
+    const name = req.query.name;
+
+    let query = {}
+    if (name) {
+        query = { name: name }
+        const singleMovie = await moviesCollection.findOne(query);
+        return res.send(singleMovie)
+    }
+    if (email) {
+        query  = { email: email }
+        const singleMovie = await moviesCollection.findOne(query);
+        return res.send(singleMovie)
+    }
+    if (email && name) {
+        query = {
+            name: name,
+            email: email
+        }
+        const singleMovie = await moviesCollection.findOne(query);
+        return res.send(singleMovie)
+    }
+
+*/

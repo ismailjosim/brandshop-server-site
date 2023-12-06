@@ -1,92 +1,92 @@
 [
-    {
-        "name": "The Lion King",
-        "image": "https://m.media-amazon.com/images/M/MV5BYTYxNGMyZTYtMjE3MS00MzNjLWFjNmYtMDk3N2FmM2JiM2M1XkEyXkFqcGdeQXVyNjY5NDU4NzI@._V1_SX300.jpg",
-        "brand": "Disney",
-        "type": "Movie",
-        "details": "A classic Disney animated film about a young lion cub named Simba who learns valuable life lessons as he grows to become king of the Pride Lands.",
-        "ticketPrice": 12.99,
-        "rating": 8.5
-    },
-    {
-        "name": "Mickey Mouse Clubhouse",
-        "image": "https://m.media-amazon.com/images/M/MV5BNTBhYWVjZTYtNTkzMS00ZTM0LWI4NjItOTU5YzMxYWI2YWQ5XkEyXkFqcGdeQXVyNzMwOTY2NTI@._V1_SX300.jpg",
-        "brand": "Disney",
-        "type": "Show",
-        "details": "A popular Disney animated show featuring Mickey Mouse and his friends as they solve various problems using fun and interactive tools.",
-        "ticketPrice": 0.00,
-        "rating": 7.9
-    },
-    {
-        "name": "Stranger Things",
-        "image": "https://m.media-amazon.com/images/M/MV5BMDZkYmVhNjMtNWU4MC00MDQxLWE3MjYtZGMzZWI1ZjhlOWJmXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
-        "brand": "Netflix",
-        "type": "Series",
-        "details": "A thrilling science fiction-horror series that follows a group of kids in the 1980s as they encounter supernatural forces and government conspiracies.",
-        "ticketPrice": 0.00,
-        "rating": 8.8
-    },
-    {
-        "name": "The Crown",
-        "image": "https://m.media-amazon.com/images/M/MV5BZTEyNjBjYmYtYWYxYi00MmQyLThlYmItY2I4NzM1Mjg1MWYxXkEyXkFqcGdeQXVyMTU3ODI3MTk2._V1_SX300.jpg",
-        "brand": "Netflix",
-        "type": "Series",
-        "details": "A historical drama series that traces the reign of Queen Elizabeth II and the major events of the 20th century in the United Kingdom.",
-        "ticketPrice": 0.00,
-        "rating": 8.7
-    },
-    {
-        "name": "Harry Potter and the Sorcerer's Stone",
-        "image": "https://m.media-amazon.com/images/M/MV5BMGVmMWNiMDktYjQ0Mi00MWIxLTk0N2UtN2ZlYTdkN2IzNDNlXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_SX300.jpg",
-        "brand": "Warner Bros",
-        "type": "Movie",
-        "details": "The first film in the Harry Potter series, following the young wizard Harry as he discovers his magical heritage and begins his journey at Hogwarts School of Witchcraft and Wizardry.",
-        "ticketPrice": 10.99,
-        "rating": 7.6
-    },
-    {
-        "name": "Friends",
-        "image": "https://m.media-amazon.com/images/M/MV5BNDVkYjU0MzctMWRmZi00NTkxLTgwZWEtOWVhYjZlYjllYmU4XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg",
-        "brand": "Warner Bros",
-        "type": "Series",
-        "details": "A beloved sitcom that revolves around a group of six friends living in New York City as they navigate through life, love, and friendship.",
-        "ticketPrice": 0.00,
-        "rating": 8.5
-    },
-    {
-        "name": "Breaking Bad",
-        "image": "https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjZmYi00MDQ1LWFjMjMtNjA5ZDdiYjdiODU5XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_SX300.jpg",
-        "brand": "Sony Pictures",
-        "type": "Series",
-        "details": "A critically acclaimed crime drama series that tells the story of a high school chemistry teacher turned methamphetamine kingpin, Walter White.",
-        "ticketPrice": 0.00,
-        "rating": 9.5
-    },
-    {
-        "name": "Spider-Man: No Way Home",
-        "image": "https://m.media-amazon.com/images/M/MV5BZWMyYzFjYTYtNTRjYi00OGExLWE2YzgtOGRmYjAxZTU3NzBiXkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_SX300.jpg",
-        "brand": "Sony Pictures",
-        "type": "Movie",
-        "details": "The latest Spider-Man film where Peter Parker seeks the help of Doctor Strange to erase his identity as Spider-Man, leading to a multiverse of possibilities.",
-        "ticketPrice": 14.99,
-        "rating": 8.9
-    },
-    {
-        "name": "Avatar",
-        "image": "https://m.media-amazon.com/images/M/MV5BZDA0OGQxNTItMDZkMC00N2UyLTg3MzMtYTJmNjg3Nzk5MzRiXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_SX300.jpg",
-        "brand": "Fox Studio",
-        "type": "Movie",
-        "details": "James Cameron's groundbreaking science fiction film set on the alien planet of Pandora, featuring the Na'vi and humans.",
-        "ticketPrice": 11.99,
-        "rating": 7.8
-    },
-    {
-        "name": "The Simpsons",
-        "image": "https://m.media-amazon.com/images/M/MV5BYjFkMTlkYWUtZWFhNy00M2FmLThiOTYtYTRiYjVlZWYxNmJkXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg",
-        "brand": "Fox Studio",
-        "type": "TV Show",
-        "details": "A long-running animated sitcom featuring the misadventures of the Simpson family in the fictional town of Springfield.",
-        "ticketPrice": 0.00,
-        "rating": 8.7
-    }
+	{
+		"name": "The Lion King",
+		"image": "https://m.media-amazon.com/images/M/MV5BYTYxNGMyZTYtMjE3MS00MzNjLWFjNmYtMDk3N2FmM2JiM2M1XkEyXkFqcGdeQXVyNjY5NDU4NzI@._V1_SX300.jpg",
+		"brand": "Disney",
+		"type": "Movie",
+		"details": "A classic Disney animated film about a young lion cub named Simba who learns valuable life lessons as he grows to become king of the Pride Lands.",
+		"ticketPrice": 12.99,
+		"rating": 8.5
+	},
+	{
+		"name": "Mickey Mouse Clubhouse",
+		"image": "https://m.media-amazon.com/images/M/MV5BNTBhYWVjZTYtNTkzMS00ZTM0LWI4NjItOTU5YzMxYWI2YWQ5XkEyXkFqcGdeQXVyNzMwOTY2NTI@._V1_SX300.jpg",
+		"brand": "Disney",
+		"type": "Show",
+		"details": "A popular Disney animated show featuring Mickey Mouse and his friends as they solve various problems using fun and interactive tools.",
+		"ticketPrice": 0.0,
+		"rating": 7.9
+	},
+	{
+		"name": "Stranger Things",
+		"image": "https://m.media-amazon.com/images/M/MV5BMDZkYmVhNjMtNWU4MC00MDQxLWE3MjYtZGMzZWI1ZjhlOWJmXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
+		"brand": "Netflix",
+		"type": "Series",
+		"details": "A thrilling science fiction-horror series that follows a group of kids in the 1980s as they encounter supernatural forces and government conspiracies.",
+		"ticketPrice": 0.0,
+		"rating": 8.8
+	},
+	{
+		"name": "The Crown",
+		"image": "https://m.media-amazon.com/images/M/MV5BZTEyNjBjYmYtYWYxYi00MmQyLThlYmItY2I4NzM1Mjg1MWYxXkEyXkFqcGdeQXVyMTU3ODI3MTk2._V1_SX300.jpg",
+		"brand": "Netflix",
+		"type": "Series",
+		"details": "A historical drama series that traces the reign of Queen Elizabeth II and the major events of the 20th century in the United Kingdom.",
+		"ticketPrice": 0.0,
+		"rating": 8.7
+	},
+	{
+		"name": "Harry Potter and the Sorcerer's Stone",
+		"image": "https://m.media-amazon.com/images/M/MV5BMGVmMWNiMDktYjQ0Mi00MWIxLTk0N2UtN2ZlYTdkN2IzNDNlXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_SX300.jpg",
+		"brand": "Warner Bros",
+		"type": "Movie",
+		"details": "The first film in the Harry Potter series, following the young wizard Harry as he discovers his magical heritage and begins his journey at Hogwarts School of Witchcraft and Wizardry.",
+		"ticketPrice": 10.99,
+		"rating": 7.6
+	},
+	{
+		"name": "Friends",
+		"image": "https://m.media-amazon.com/images/M/MV5BNDVkYjU0MzctMWRmZi00NTkxLTgwZWEtOWVhYjZlYjllYmU4XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg",
+		"brand": "Warner Bros",
+		"type": "Series",
+		"details": "A beloved sitcom that revolves around a group of six friends living in New York City as they navigate through life, love, and friendship.",
+		"ticketPrice": 0.0,
+		"rating": 8.5
+	},
+	{
+		"name": "Breaking Bad",
+		"image": "https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjZmYi00MDQ1LWFjMjMtNjA5ZDdiYjdiODU5XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_SX300.jpg",
+		"brand": "Sony Pictures",
+		"type": "Series",
+		"details": "A critically acclaimed crime drama series that tells the story of a high school chemistry teacher turned methamphetamine kingpin, Walter White.",
+		"ticketPrice": 0.0,
+		"rating": 9.5
+	},
+	{
+		"name": "Spider-Man: No Way Home",
+		"image": "https://m.media-amazon.com/images/M/MV5BZWMyYzFjYTYtNTRjYi00OGExLWE2YzgtOGRmYjAxZTU3NzBiXkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_SX300.jpg",
+		"brand": "Sony Pictures",
+		"type": "Movie",
+		"details": "The latest Spider-Man film where Peter Parker seeks the help of Doctor Strange to erase his identity as Spider-Man, leading to a multiverse of possibilities.",
+		"ticketPrice": 14.99,
+		"rating": 8.9
+	},
+	{
+		"name": "Avatar",
+		"image": "https://m.media-amazon.com/images/M/MV5BZDA0OGQxNTItMDZkMC00N2UyLTg3MzMtYTJmNjg3Nzk5MzRiXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_SX300.jpg",
+		"brand": "Fox Studio",
+		"type": "Movie",
+		"details": "James Cameron's groundbreaking science fiction film set on the alien planet of Pandora, featuring the Na'vi and humans.",
+		"ticketPrice": 11.99,
+		"rating": 7.8
+	},
+	{
+		"name": "The Simpsons",
+		"image": "https://m.media-amazon.com/images/M/MV5BYjFkMTlkYWUtZWFhNy00M2FmLThiOTYtYTRiYjVlZWYxNmJkXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg",
+		"brand": "Fox Studio",
+		"type": "TV Show",
+		"details": "A long-running animated sitcom featuring the misadventures of the Simpson family in the fictional town of Springfield.",
+		"ticketPrice": 0.0,
+		"rating": 8.7
+	}
 ]
