@@ -53,7 +53,7 @@ const client = new MongoClient(uri, {
 
 const dbConnect = async () => {
     try {
-        client.connect()
+        // client.connect()
         console.log('DB Connected Successfully✅')
     } catch (error) {
         console.log(error.name, error.message)
@@ -427,28 +427,19 @@ app.listen(port, () => {
 })
 
 
-/*
-    const email = req.query.email;
-    const name = req.query.name;
-
-    let query = {}
-    if (name) {
-        query = { name: name }
-        const singleMovie = await moviesCollection.findOne(query);
-        return res.send(singleMovie)
-    }
-    if (email) {
-        query  = { email: email }
-        const singleMovie = await moviesCollection.findOne(query);
-        return res.send(singleMovie)
-    }
-    if (email && name) {
-        query = {
-            name: name,
-            email: email
+app.get("/gallery", async (req, res) => {
+    try {
+        const query = {};
+        let imgLimit = parseInt(req.query.limit);
+        if (isNaN(imgLimit) || imgLimit <= 0) {
+            imgLimit = 10;
         }
-        const singleMovie = await moviesCollection.findOne(query);
-        return res.send(singleMovie)
+        const result = await galleryCollection.find().limit(imgLimit).toArray();
+        res.send({
+            result,
+            total: result.length
+        });
+    } catch (error) {
+        res.status(500).send({ error: error.message });
     }
-
-*/
+});
