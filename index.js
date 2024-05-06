@@ -1,6 +1,6 @@
+require('dotenv').config()
 require('colors')
 const express = require('express')
-require('dotenv').config()
 const cors = require('cors')
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
 const jwt = require('jsonwebtoken')
@@ -422,9 +422,6 @@ app.post('/users', async (req, res) => {
     }
 })
 
-app.listen(port, () => {
-    console.log(`DB Server Running on Port:${ port }📥`.cyan.bold)
-})
 
 
 app.get("/gallery", async (req, res) => {
@@ -443,3 +440,8 @@ app.get("/gallery", async (req, res) => {
         res.status(500).send({ error: error.message });
     }
 });
+
+
+app.listen(port, () => {
+    console.log(`DB Server Running on Port:${ port }📥`.cyan.bold)
+})
